@@ -31,6 +31,13 @@ jobs:
       - name: Run autopep8 to fix PEP 8 issues
         run: |
           autopep8 --in-place --aggressive --recursive .
+     
+      - name: Check for changes
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes to commit."
+            exit 0
+          fi
 
       - name: Commit and push changes
         run: |
